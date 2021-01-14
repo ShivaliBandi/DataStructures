@@ -7,7 +7,7 @@ and is data is same then it wont insert because we dont insert duplicate element
 OUTPUT:it doesnt return anything
 INPUT:address of root and integer value
 */
-#include"binary_tree.h"
+#include"binary_search_tree.h"
 //createNode:this function  creates a new node 
 //OUTPUT: return pointer of new node 
 // input:integer value

@@ -11,7 +11,7 @@ int main()
 		int ino=0;
 		printf("please choose:\n1.insert a value in tree \n2.display tree in In-Order trasversal\n3.display tree in Post-Order traversal\n4.display tree in Pre-Order traversal\n");
 		printf("5.Count Number Of Nodes\n6.Count Number Of Leaf Node\n7.search  node in tree\n8.Maximun element from given tree\n9.Minimmum elememnt from given tree\n");
-		printf("10.delete node\n");
+		printf("10.delete node\n11.Count Parent Nodes\n");
         scanf("%d",&inum);
 		switch(inum)
 		{
@@ -46,6 +46,13 @@ int main()
             case 5:
                 printf("Count Number Of Nodes In Tree\t%d\n",countNodes(root));
                 break;
+            case 6:
+                printf("Count Number Of Leaf Nodes In Tree\t%d\n",countLeafNodes(root));
+                break;
+            case 11:
+                printf("Count Number Of Parent Nodes In Tree\t%d\n",countNonLeafNodes(root));
+                break;
+
             case 8:
                 if(maxElement(root)==(-2147483648))
             	printf("Maximum element from tree is %d\n",maxElement(root));
@@ -97,6 +104,41 @@ int countNodes(PNODE root)
    
 
 }
+
+/*
+
+*/
+int countNonLeafNodes(PNODE root)
+{
+     if(root!=NULL)
+     {
+        if(root->lchild==NULL && root->rchild==NULL)
+            return 0;
+        
+        return countNonLeafNodes(root->lchild) + countNonLeafNodes(root->rchild)+1;
+
+     }
+     
+}
+
+
+
+/*
+countLeafNodes:this function print number of leaf nodes in tree
+INPUT:this function take input a root of a tree
+OUTPUT:this function return count of leaf node
+*/
+int countLeafNodes(PNODE root)
+{
+    if(root!=NULL)
+    {
+        if(root->lchild==NULL && root->rchild==NULL)
+            return 1;
+        return countLeafNodes(root->lchild) + countLeafNodes(root->rchild);    
+    }
+}
+
+
 
 
 /*

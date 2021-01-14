@@ -3,7 +3,7 @@ searchNodes:this function searches the key in tree
 input:this function takes input root of tree and a key which we want to find in tree
 output:it returns flag which tells us wheter the key is present or not
 */
-#include"binary_tree.h"
+#include"binary_search_tree.h"
 int searchNode(PNODE root,int value)
 {
    int iflag=-1;
