@@ -27,14 +27,28 @@ int main()
                     brr[irow][icol]=j;
                 else
                 {   
-                    printf("Edge out of range\ntotal vertieces are %d so enter edge between 0 to %d",N,N);
+                    printf("Edge out of range\ntotal vertices are %d so enter edge between 0 to %d",N,N);
                     scanf("%d",&j);
                     goto label;
                 }
                 
             }
-
-       
+        for(int irow=0;irow<M;irow++)
+        {
+            for(int icol=0;icol<2;icol++)
+            {
+                arr[irow][icol]=1;
+                arr[icol][irow]=1;
+            }
+        }
+        for(int irow=0;irow<N;irow++)
+        {
+            for(int icol=0;icol<N;icol++)
+            {
+                printf("%d ",arr[irow][icol]);
+            }
+            printf("\n");
+        }
 
     return 0;
 }
