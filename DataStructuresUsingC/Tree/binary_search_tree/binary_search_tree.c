@@ -1,7 +1,9 @@
 //implementation of binary search tree in c
 #include"binary_search_tree.h"
 //#include"countNodes.h"
+
 #include<limits.h>
+int rangeSumBST(PNODE root,int low,int high);
 int main()
 {
     PNODE root=NULL;
@@ -74,7 +76,12 @@ int main()
                 else
                     printf("deletion successfull\n");
                 break;
-                
+             case 90:
+             	printf("enter value low and high\n");
+                scanf("%d%d",&inum,&ivalue);
+                ivalue=rangeSumBST(root,inum,ivalue);
+                printf("%d\t\t---",ivalue);
+                break;
 			default:
 				exit(0);
 
@@ -159,7 +166,20 @@ void inOrder(PNODE root)
 
 }
 
-
+int rangeSumBST(PNODE root, int low, int high){
+   static int isum=0;
+    if(root!=NULL)
+    {
+        rangeSumBST(root->lchild,low,high);
+        
+        rangeSumBST(root->rchild,low,high);
+        printf("%d\t",isum);
+        if(root->data>=low && root->data<=high)
+            isum+=root->data;
+            
+    }
+    return isum;
+}
 PNODE createNode(int value)
 {
     PNODE newNode=(PNODE)malloc(sizeof(NODE));
