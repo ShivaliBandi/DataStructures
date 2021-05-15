@@ -252,22 +252,73 @@ void DoublyLinearLinkedList::deleteAtPosition(int ipos)
        cout<<"ERROR INVALID POSITION\n";
     }
 }
+void DoublyLinearLinkedList::deleteByValue(char element)
+{
+    Node *temp=head;
+    if(temp==NULL)
+        cout<<"LINKED LLIST IS EMPTY\n";
+    else if(temp->next==NULL)
+    {
+        if(temp->data==element)
+        {
+            head=NULL;
+            delete head;
+        }
+    }
+
+    else
+    {
+        while( temp->next->data!=element || (temp->next->next!=NULL && temp->next!=NULL )    )
+        {
+            if(head->data==element)
+            {
+                Node *temp1=head;
+                head=head->next;
+                head->prev=NULL;
+                delete temp1;
+                break;
+            }
+          
+            else if(temp->next->data==element)
+            {  
+               Node *temp1=temp->next;
+                temp->next=temp->next->next;
+                temp->next->prev=temp;
+                delete temp1; 
+                break;
+
+            }
+            //cout<<temp->data<<"  TEMP  ";
+            temp=temp->next;
+        }
+        if(temp->next->data==element)
+        {
+            Node *temp1=temp->next;
+            temp->next=NULL;
+            delete temp1;
+        }
+
+    }
+   
+}
 int main()
 {
     DoublyLinearLinkedList *dobj=new DoublyLinearLinkedList();
     
      (*dobj).insertAtLast('d');
+     
     (*dobj).insertAtLast('e');
     (*dobj).insertAtLast('f');
-    (*dobj).insertAtPosition(3,'j');
-    (*dobj).insertAtPosition(2,'k');
+    (*dobj).insertAtLast('g');
+    (*dobj).insertAtLast('h');
+    
     cout<<"\n"<<dobj->count()<<"\n";
  
     cout<<"Display Forward\n";
     dobj->displayForward();
-     dobj->deleteAtPosition(5);
-   // dobj->deleteAtLast();
-  //  (*dobj).insertAtPosition(1,'p');
+    dobj->deleteByValue('h');
+    //dobj->deleteAtLast();
+    //(*dobj).insertAtPosition(1,'p');
     cout<<"\nDisplay Forward\n";
     dobj->displayForward();
      
