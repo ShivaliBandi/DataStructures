@@ -35,6 +35,7 @@ class DoublyLinearLinkedList
 // default constructor
 DoublyLinearLinkedList::DoublyLinearLinkedList()
 {
+    
     head=NULL;
 }
 //this function inserts element at first in linkedlist
@@ -46,7 +47,7 @@ void DoublyLinearLinkedList::insertAtFirst(char element)
     if(head==NULL)
     {
         head=newNode;
-    }
+    }//if LinkedList is not empty
     else
     {   
         newNode->next=head;
@@ -54,7 +55,7 @@ void DoublyLinearLinkedList::insertAtFirst(char element)
         head=newNode;
     }
 }
-//this function displays linkedList
+//this function displays linkedList in forward manner
 void DoublyLinearLinkedList::displayForward()
 {
     Node *temp=head;
@@ -90,6 +91,8 @@ void DoublyLinearLinkedList::displayBackward()
         }
     }
 }
+//this function inserts element at the end of the linkedlist 
+//it accepts element
 void DoublyLinearLinkedList::insertAtLast(char element)
 {   
    Node *newNode=new Node();
@@ -108,6 +111,7 @@ void DoublyLinearLinkedList::insertAtLast(char element)
 
     }
 }
+//this function returns total number of count in linkedlist
 int DoublyLinearLinkedList::count()
 {
     Node *temp=head;
@@ -253,16 +257,22 @@ void DoublyLinearLinkedList::deleteAtPosition(int ipos)
     }
 }
 void DoublyLinearLinkedList::deleteByValue(char element)
-{
+{   int flag=0;
     Node *temp=head;
     if(temp==NULL)
-        cout<<"LINKED LLIST IS EMPTY\n";
+    {
+        cout<<"LINKED LIST IS EMPTY\n";
+       // flag=0;
+
+    }
+        
     else if(temp->next==NULL)
     {
         if(temp->data==element)
         {
             head=NULL;
             delete head;
+            flag=1;
         }
     }
 
@@ -276,6 +286,7 @@ void DoublyLinearLinkedList::deleteByValue(char element)
                 head=head->next;
                 head->prev=NULL;
                 delete temp1;
+                flag=1;
                 break;
             }
           
@@ -285,10 +296,10 @@ void DoublyLinearLinkedList::deleteByValue(char element)
                 temp->next=temp->next->next;
                 temp->next->prev=temp;
                 delete temp1; 
+                flag=1;
                 break;
 
             }
-            //cout<<temp->data<<"  TEMP  ";
             temp=temp->next;
         }
         if(temp->next->data==element)
@@ -296,33 +307,118 @@ void DoublyLinearLinkedList::deleteByValue(char element)
             Node *temp1=temp->next;
             temp->next=NULL;
             delete temp1;
+            flag=1;
         }
 
     }
+    if(flag==0)
+    cout<<"Element is not present please enter element which is present in linkedList\n";
+    else
+    cout<<"ELement deleted successfully\n";
    
+}
+//deallocating memory for linkedllist
+DoublyLinearLinkedList::~DoublyLinearLinkedList()
+{
+    Node *temp=head;
+cout<<temp<<" before head delete \n";
+
+    while(head!=NULL)
+    {
+     cout<<temp<<" head in while loop\n";   
+        head=head->next;
+        delete temp;
+        temp=head;
+    }
+    cout<<temp<<" head after deletion\n";
 }
 int main()
 {
     DoublyLinearLinkedList *dobj=new DoublyLinearLinkedList();
     
-     (*dobj).insertAtLast('d');
-     
-    (*dobj).insertAtLast('e');
-    (*dobj).insertAtLast('f');
-    (*dobj).insertAtLast('g');
-    (*dobj).insertAtLast('h');
+    int i = 0 , cnt = 0 , pos = 0 , no = 0 ;
+    char ele='\0';
+	
+		
+	cout<<"**************Doubly Linear LinkedList**************\n\n";
+	while(1)
+	{
+		cout<<"1.Inserting the element at FIRST position \n\n2.Inserting the element at ANY position \n\n3.Inserting the element at LAST position \n\n4.Count the elements\n\n5.Display the elements in reverse \n\n6.Delete the element POSITION wise\n\n7.Search\n\n8.Delete the element that you want to delete VALUE wise\n\n0.Exit\n";
+		cout<<"\n9.display linked list in forward  manner\nEnter your choice :\n";
+		cin>>no;
+		
+		switch(no)
+		{
+			case 1:
+					cout<<"Enter the  character data :\n";
+					cin>>ele;
+					(*dobj).insertAtFirst(ele);
+					break;
+					
+			case 2:
+					cout<<"Enter the  character data and position\n";
+					cin>>ele;
+                    cin>>pos;
+					dobj->insertAtPosition(pos,ele);
+					break;
+					
+			case 3:
+					cout<<"Enter the character data :\n";
+					cin>>ele;
+					dobj->insertAtLast(ele);
+					break;
+			
+			case 4:
+					
+					cout<<"Number of Elements from the given linkedlist : "<<dobj->count()<<endl;
+					break;
+			
+			case 5:
+					
+						cout<<"Elements from the given list in reverse position are :\n";
+						dobj->displayBackward();
+					
+					break;
+            case 9:
+					
+						cout<<"Elements from the given list  are :\n";
+						dobj->displayForward();
+					
+					break;
+				
+			case 6:
+					cout<<"Enter the pos :\n";
+					cin>>pos;
+					dobj->deleteAtPosition(pos);
+					break;
+					
+			case 7:
+					cout<<"Enter the no that you want to search :\n";
+					cin>>ele;
+					if(dobj->search(ele))
+						cout<<ele<<" is found in the linked list...!!\n";
+					else
+						cout<<ele<<" is not present in the linked list..!!\n";
+					break;
+			
+			case 8:
+					cout<<"Enter the no that you want to delete :\n";
+					cin>>ele;
+					dobj->deleteByValue(ele);
+					
+					break;
+					
+			case 0:
+					exit(0);
+					
+			default:
+					printf("Wrong choice...!\n\n");
+		}
+	}
+
+    delete dobj;
+    //delete *dobj;
+   // cout<<dobj<<"\n";
     
-    cout<<"\n"<<dobj->count()<<"\n";
- 
-    cout<<"Display Forward\n";
-    dobj->displayForward();
-    dobj->deleteByValue('h');
-    //dobj->deleteAtLast();
-    //(*dobj).insertAtPosition(1,'p');
-    cout<<"\nDisplay Forward\n";
-    dobj->displayForward();
-     
-  
-    cout<<"\n"<<dobj->count()<<"\n"<<endl;
 }
 
