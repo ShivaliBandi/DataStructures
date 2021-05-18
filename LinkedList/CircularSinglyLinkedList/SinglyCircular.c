@@ -4,10 +4,11 @@
 
 int main()
 {
+	struct node* head = NULL;
+
 	int i = 0 , cnt = 0 , ele = 0 , pos = 0 , no = 0 ;
 	
-	struct node* head = NULL;
-	
+		
 	printf("**************Singly Circular LinkedList**************\n\n");
 	while(1)
 	{
