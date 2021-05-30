@@ -65,7 +65,12 @@ int Queue::deQueue()
     }
     else
     {
-        int ivalue=queue[rear--];
+        int ivalue=queue[front];
+        for (int i = 0; i < rear - 1; i++) {
+                queue[i] = queue[i + 1];
+            }
+            rear--
+        
         return ivalue;
     }
 }
