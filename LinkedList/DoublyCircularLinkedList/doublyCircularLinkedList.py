@@ -154,39 +154,37 @@ class doublyCircularLinkedList:
             if(temp.data==element):
                 flag=1
         return flag
-def main():
-    print("InsideMain")
-    dobj=doublyCircularLinkedList()
-    
-    dobj.insertFirst(50)
-   
-    dobj.insertFirst(40)
-    dobj.insertFirst(30)
-    dobj.insertLast(60)
-    dobj.insertLast(70)
-    print("display forward")
-    dobj.displayForward()
-    dobj.deleteFirst()
-   
-    dobj.insertAt(100,dobj.count()+1)
-    print("display forward")
-    dobj.displayForward()
-    print("display backward")
-    dobj.displayReverse()
-    dobj.deleteAt(1)
-    print("display forward")
-    dobj.displayForward()
-    print("display backward")
-    dobj.displayReverse()
-    flag=dobj.search(0)
-    if(flag==1):
-        print("Element is present in Linked List")
-    elif(flag==-1):
-        print("linkedList Is Empty")
-    else:
-        print("Element is not present in linkedList")
+    def deleteByValue(self,element):
+        temp=self.head
+        flag=0
+        if(temp==None):
+            flag=-1
+        else:
+            if(temp.data==element):
+                self.deleteFirst()
+                flag=1
+            else:
+                while(temp.next!=self.head and temp.next.data!=element):
+                    temp=temp.next
+                if(temp.next.data==element):
+                    temp1=temp.next
+                    temp.next=temp1.next
+                    temp1.next.prev=temp
+                    del temp1
+                    flag=1
+                else:
+                    flag=0
+            return flag
+
+def main(option):
+     dobj=doublyCircularLinkedList()
+    # switcher={
+    #     1:
+    #     element=input()
 
 
-   # print("count of nodes in linked list -->",dobj.count())
 if __name__=="__main__":
-    main()
+    print("1.INSERT AT FIRST\n2.INSERT AT LAST\n3.INSERT AT ANY POSITION\n4.Display Forward\n5:Display reverse\n")
+    print("6.Delete First\n7.Delete Last\n8.Delete By Position\n9.Delete by value\n10.exit\n")
+    option=input()
+    main(option)

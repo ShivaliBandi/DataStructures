@@ -66,10 +66,10 @@ int Queue::deQueue()
     else
     {
         int ivalue=queue[front];
-        for (int i = 0; i < rear - 1; i++) {
+        for (int i = 0; i < rear; i++) {
                 queue[i] = queue[i + 1];
             }
-            rear--
+            rear--;
         
         return ivalue;
     }
@@ -118,18 +118,20 @@ int main()
         cout<<"value inserted successfully in queue\n";
     else
         cout<<"QUEUE IS OVERFLOW SO VALUE CANT BE Inserted"<<endl;
-     iret=qobj->enQueue(50);
+     iret=qobj->enQueue(230);
     if(iret==1)
         cout<<"value inserted successfully in queue\n";
     else
         cout<<"QUEUE IS OVERFLOW SO VALUE CANT BE Inserted"<<endl;
-     iret=qobj->enQueue(60);
-    if(iret==1)
-        cout<<"value inserted successfully in queue\n";
+
+    qobj->displayQueue();
+    iret=qobj->deQueue();
+    if(iret!=-1)
+        cout<<"value deleted successfully from queue value="<<iret<<endl;
     else
-        cout<<"QUEUE IS OVERFLOW SO VALUE CANT BE Inserted"<<endl;
-    iret=qobj->enQueue(70);
-    
+        cout<<"QUEUE IS UNDERLOW SO VALUE CANT BE deleted"<<endl;
+    qobj->displayQueue();
+     iret=qobj->enQueue(100);
     if(iret==1)
         cout<<"value inserted successfully in queue\n";
     else
