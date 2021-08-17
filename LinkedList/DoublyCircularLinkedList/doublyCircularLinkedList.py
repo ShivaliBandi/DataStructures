@@ -154,6 +154,7 @@ class doublyCircularLinkedList:
             if(temp.data==element):
                 flag=1
         return flag
+    #deletByValue functiom delete the node as per value
     def deleteByValue(self,element):
         temp=self.head
         flag=0
